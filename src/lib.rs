@@ -14,7 +14,7 @@ mod tests {
 
     #[tokio::test]
     async fn it_works() {
-        let lol = Riot::new("RGAPI-c2c7de15-3adb-423e-8ab2-8002b9062e06").league_of_legends(RegionalRoutingValue::Americas, PlatformRoutingValue::NA1);
+        let lol = Riot::new("xxxxxxxxxxxxxxxxxxxxxxxxxx").league_of_legends(RegionalRoutingValue::Americas, PlatformRoutingValue::NA1);
         let c = lol.account(AccountQuery::ByRiotId {
             tag_line: "oops".to_string(),
             game_name: "Major Motoko".to_string(),
