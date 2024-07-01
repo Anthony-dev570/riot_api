@@ -1,0 +1,10 @@
+[package]
+name = "riot_api"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+reqwest = { version = "*", features = ["default", "json"] }
+tokio = { version = "*", features = ["full", "test-util"] }
+serde = { version = "1.0.203", features = ["derive"] }
+urlencoding = "*"
