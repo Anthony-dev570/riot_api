@@ -33,7 +33,7 @@ impl<'a> LeagueOfLegends<'a> {
         query.query(self.platform_routing_value, self.key).await
     }
 
-    pub fn clash(&self, query: ClashQuery) {
-        query.query(self.regional_routing_value, self.key);
+    pub async fn clash(&self, query: ClashQuery) -> Result<(), Error> {
+        query.query(self.regional_routing_value, self.key).await
     }
 }

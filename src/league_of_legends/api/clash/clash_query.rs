@@ -1,4 +1,5 @@
 use serde::{Deserialize, Serialize};
+use crate::league_of_legends::api::clash::player_dto::PlayerDto;
 use crate::league_of_legends::routing::regional_routing_value::RegionalRoutingValue;
 use crate::utilities::to_url::ToUrl;
 
@@ -8,16 +9,28 @@ pub enum ClashQuery {
     TeamByTeamId(String),
     Tournaments,
     TournamentByTeamId(String),
-    TournamentById(i32)
+    TournamentById(i32),
 }
 
 impl ClashQuery {
     const BASE_URL: &'static str = "https://{}.api.riotgames.com/lol/clash/v1/";
 
-    pub fn query(&self, region: RegionalRoutingValue, key: &str) {
+    pub async fn query(&self, region: RegionalRoutingValue, key: &str) -> Result<(), crate::error::Error> {
+        todo!("Need to implement summoner api before this.");
         let url = format!("{}?api_key={}", self.to_url().replace("{}", &region.to_string()), key);
 
-        println!("{}", url);
+        match self {
+            ClashQuery::BySummonerId(_) => {
+                let players: Vec<PlayerDto> = reqwest::get(url).await.map_err(|e| crate::error::Error::Http(e))?.json().await.map_err(|e| crate::error::Error::Http(e))?;
+                println!("{:?}", players);
+            }
+            ClashQuery::TeamByTeamId(_) => {}
+            ClashQuery::Tournaments => {}
+            ClashQuery::TournamentByTeamId(_) => {}
+            ClashQuery::TournamentById(_) => {}
+        }
+
+        Ok(())
     }
 }
 

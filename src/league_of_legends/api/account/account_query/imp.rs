@@ -9,8 +9,7 @@ impl AccountQuery {
     pub async fn query(&self, routing_value: RegionalRoutingValue, key: &str) -> Result<AccountDto, crate::error::Error> {
         let url = format!("{}?api_key={}", self.to_url().replace("{}", &routing_value.to_string()).replace(" ", "%20"), key);
 
-        let me: AccountDto = reqwest::get(url).await.map_err(|e| crate::error::Error::Http(e))?.json().await.map_err(|e| crate::error::Error::Http(e))?;
-        Ok(me)
+        reqwest::get(url).await.map_err(|e| crate::error::Error::Http(e))?.json().await.map_err(|e| crate::error::Error::Http(e))
     }
 }
 
