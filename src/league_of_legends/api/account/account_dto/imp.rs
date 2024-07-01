@@ -1,4 +1,4 @@
-use crate::league_of_legends::account::account_dto::AccountDto;
+use crate::league_of_legends::api::account::account_dto::AccountDto;
 
 impl AccountDto {
     pub fn puuid(&self) -> &str {

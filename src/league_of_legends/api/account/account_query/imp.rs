@@ -1,8 +1,17 @@
-use crate::league_of_legends::account::account_query::AccountQuery;
+use crate::league_of_legends::api::account::account_dto::AccountDto;
+use crate::league_of_legends::api::account::account_query::AccountQuery;
+use crate::league_of_legends::routing::regional_routing_value::RegionalRoutingValue;
 use crate::utilities::to_url::ToUrl;
 
 impl AccountQuery {
-    const BASE_URL: &'static str = "https://.api.riotgames.com/riot/account/v1/";
+    const BASE_URL: &'static str = "https://{}.api.riotgames.com/riot/account/v1/";
+
+    pub async fn query(&self, routing_value: RegionalRoutingValue, key: &str) -> Result<AccountDto, crate::error::Error> {
+        let url = format!("{}?api_key={}", self.to_url().replace("{}", &routing_value.to_string()).replace(" ", "%20"), key);
+
+        let me: AccountDto = reqwest::get(url).await.map_err(|e| crate::error::Error::Http(e))?.json().await.map_err(|e| crate::error::Error::Http(e))?;
+        Ok(me)
+    }
 }
 
 impl ToUrl for AccountQuery {
