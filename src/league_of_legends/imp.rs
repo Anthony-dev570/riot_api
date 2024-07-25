@@ -36,4 +36,8 @@ impl<'a> LeagueOfLegends<'a> {
     pub async fn clash(&self, query: ClashQuery) -> Result<(), Error> {
         query.query(self.regional_routing_value, self.key).await
     }
+
+    pub fn key(&self) -> &'a str {
+        self.key
+    }
 }

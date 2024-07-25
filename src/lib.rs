@@ -6,18 +6,23 @@ pub mod error;
 #[cfg(test)]
 mod tests {
     use crate::league_of_legends::api::account::account_query::AccountQuery;
+    use crate::league_of_legends::api::summoner::summoner_query::SummonerQuery;
     use crate::league_of_legends::routing::platform_routing_value::PlatformRoutingValue;
     use crate::league_of_legends::routing::regional_routing_value::RegionalRoutingValue;
     use crate::riot::Riot;
 
     #[tokio::test]
     async fn it_works() {
-        let lol = Riot::new("xxxxxxxxxxxxxxxxxxxxxxxxx").league_of_legends(RegionalRoutingValue::Americas, PlatformRoutingValue::NA1);
+        let lol = Riot::new("RGAPI-325d04ab-fa5f-4db1-bb51-26cfb2ddf674").league_of_legends(RegionalRoutingValue::Americas, PlatformRoutingValue::NA1);
+
+        SummonerQuery::ByRSO("RSO".to_string()).query(PlatformRoutingValue::NA1, lol.key()).await.unwrap();
         let c = lol.account(AccountQuery::ByRiotId {
             tag_line: "oops".to_string(),
             game_name: "Major Motoko".to_string(),
         }).await.unwrap();
 
 
+
+        println!("{:?}", c);
     }
 }
