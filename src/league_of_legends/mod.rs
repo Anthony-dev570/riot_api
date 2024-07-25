@@ -5,7 +5,6 @@ pub mod imp;
 pub mod api;
 pub mod routing;
 
-
 pub struct LeagueOfLegends<'a> {
     key: &'a str,
     platform_routing_value: PlatformRoutingValue,

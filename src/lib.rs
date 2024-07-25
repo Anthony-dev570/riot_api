@@ -13,7 +13,7 @@ mod tests {
 
     #[tokio::test]
     async fn it_works() {
-        let lol = Riot::new("RGAPI-325d04ab-fa5f-4db1-bb51-26cfb2ddf674").league_of_legends(RegionalRoutingValue::Americas, PlatformRoutingValue::NA1);
+        let lol = Riot::new("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx").league_of_legends(RegionalRoutingValue::Americas, PlatformRoutingValue::NA1);
 
         SummonerQuery::ByRSO("RSO".to_string()).query(PlatformRoutingValue::NA1, lol.key()).await.unwrap();
         let c = lol.account(AccountQuery::ByRiotId {
